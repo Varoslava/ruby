@@ -18,7 +18,8 @@ class Building
   include BuildingUtilities
   extend BuildingCategories
 
-  attr_reader :name, :area, :height, :floor_height, :heated
+  attr_reader :name, :area, :height, :floor_height
+  attr_accessor :heated
 
   def initialize(name, area, height, floor_height, heated)
     @name = name
@@ -41,10 +42,6 @@ class Building
   def floor_height=(value)
     raise ArgumentError, "Висота поверху повинна бути додатною" unless value > 0
     @floor_height = value
-  end
-
-  def heated=(value)
-    @heated = value
   end
 
   def heating_cost(rate = 50)
@@ -111,7 +108,7 @@ end
 
 residential = ResidentialBuilding.new("Житловий будинок", 1200, 30, 3, true, 40)
 office = OfficeBuilding.new("Бізнес-центр", 2000, 36, 3, true, 150)
-public = PublicBuilding.new("Торговий центр", 3500, 24, 4, true, 500)
+public = PublicBuilding.new("Торговий центр", 3500, 24, 4, false, 500)
 
 buildings = [residential, office, public]
 
