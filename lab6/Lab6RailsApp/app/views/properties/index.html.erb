@@ -1,0 +1,37 @@
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Усі об'єкти нерухомості</h1>
+    </div>
+
+  <% if @properties.any? %>
+    <div class="row">
+      <% @properties.each do |property| %>
+        <div class="col-md-6 col-lg-4 mb-4">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title"><%= property.title %></h5>
+
+              <p class="card-text"><%= property.description %></p>
+
+              <p class="mb-2">
+                <strong>Ціна:</strong>
+                <%= number_to_currency(property.price, unit: "грн", format: "%n %u") %>
+              </p>
+
+              <p>
+                <strong>Категорія:</strong>
+                <%= property.category %>
+              </p>
+
+              <%= link_to "Детальніше", property_path(property), class: "btn btn-outline-primary" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="alert alert-info">
+      Поки що об'єктів нерухомості немає.
+    </div>
+  <% end %>
+</div>

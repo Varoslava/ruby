@@ -1,0 +1,40 @@
+<%= form_with(model: property) do |form| %>
+  <% if property.errors.any? %>
+    <div class="alert alert-danger">
+      <h5>Під час збереження виникли помилки:</h5>
+      <ul>
+        <% property.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :title, "Назва об'єкта", class: "form-label" %>
+    <%= form.text_field :title, class: "form-control", placeholder: "Наприклад, двокімнатна квартира" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :description, "Опис", class: "form-label" %>
+    <%= form.text_area :description, class: "form-control", rows: 4, placeholder: "Опишіть нерухомість" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :price, "Ціна (грн)", class: "form-label" %>
+    <%= form.number_field :price, class: "form-control", step: "any", min: 0 %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :category, "Категорія", class: "form-label" %>
+    <%= form.select :category,
+      [["Купівля", "Купівля"], ["Оренда", "Оренда"], ["Добово", "Добово"]],
+      { prompt: "Оберіть категорію" },
+      class: "form-select" %>
+  </div>
+
+  <div class="d-flex gap-2">
+    <%= form.submit "Зберегти", class: "btn btn-primary" %>
+    <%= link_to "Назад", properties_path, class: "btn btn-secondary" %>
+  </div>
+<% end %>

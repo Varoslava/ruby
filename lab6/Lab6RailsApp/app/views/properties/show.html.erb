@@ -1,0 +1,33 @@
+<div class="container mt-5">
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h1 class="mb-4"><%= @property.title %></h1>
+
+      <p>
+        <strong>Опис:</strong><br>
+        <%= @property.description %>
+      </p>
+
+      <p>
+        <strong>Ціна:</strong>
+        <%= number_to_currency(@property.price, unit: "грн", format: "%n %u") %>
+      </p>
+
+      <p>
+        <strong>Категорія:</strong>
+        <%= @property.category %>
+      </p>
+
+      <div class="d-flex gap-2 mt-4">
+        <%= link_to "Редагувати", edit_property_path(@property), class: "btn btn-warning" %>
+
+        <%= button_to "Видалити", property_path(@property),
+          method: :delete,
+          class: "btn btn-danger",
+          form: { data: { turbo_confirm: "Ви впевнені, що хочете видалити цей об'єкт?" } } %>
+
+        <%= link_to "До всіх об'єктів", properties_path, class: "btn btn-secondary" %>
+      </div>
+    </div>
+  </div>
+</div>
